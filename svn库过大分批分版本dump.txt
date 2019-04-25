@@ -1,0 +1,15 @@
+对比较大的库可以分解成几个文件导出，便于备份--incremental代表增量
+
+$svnadmin dump myrepos –r 0:1000 >0-1000.dumpfile
+
+$svnadmin dump myrepos –r 1001:2000 --incremental >1001-2000.dumpfile
+
+$svnadmin dump myrepos –r 2001:3000 --incremental >2001:3000.dumpfile
+
+在导入时，可以将这几个备份文件装载到一个新的版本库中
+
+$svnadmin load myrepos < 0-1000.dumpfile
+
+$svnadmin load myrepos < 1001-2000.dumpfile
+
+$svnadmin load myrepos < 2001:3000.dumpfile

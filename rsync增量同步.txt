@@ -1,0 +1,23 @@
+数据库和网站rsync备份
+#!/bin/bash
+#从源到目标的rsync,从本地复制到远端主机
+user='root'
+host='192.168.12.129' #目标IP
+option='-avz --progress --delete-after'
+mydir='/root/rsyncfile/'  #目录名
+bakdir='/root/rsyncbak'  #目录名
+logtime=`date "+%Y%m%d"`
+starttime=`date "+%Y-%m-%d,%H:%M:%S"`
+stoptime=`date "+%Y-%m-%d,%H:%M:%S"`
+logname='/root/rsynclog/'`echo $logtime | cut -d/ -f1`'.log'
+echo ”###################$starttime######################“ >> $logname
+rsync $option $mydir $user@$host:$bakdir >> $logname
+if [ $? -eq 1 ]
+then
+        echo error!!!!!
+else if [ $? -eq 0 ]
+then
+        echo Ok!
+fi
+fi
+echo ”###################$stoptime######################“ >> $logname

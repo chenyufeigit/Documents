@@ -1,0 +1,32 @@
+LDAP简称对应
+o– organization（组织-公司）
+ou – organization unit（组织单元/部门）
+c - countryName（国家）
+dc - domainComponent（域名组件）
+sn – suer name（真实名称）
+cn - common name（常用名称）
+dn - distinguished name（专有名称）
+
+
+客户端查询要加 -H ldap://192.168.240.194
+
+查看用户列表
+ldapsearch -x -b "ou=组,dc=gnetis,dc=com" | grep dn
+
+添加用户
+ldapadd -x -D "cn=Manager,dc=gnetis,dc=com" -W -f user.ldif文件
+
+用户自己改密码
+ldappasswd -x -D "cn=用户名,ou=组,dc=gnetis,dc=com" -w -S
+
+管理员更改用户密码
+ldappasswd -x -D "cn=admin,dc=gnetis,dc=com" -W -S "uid=用户名,ou=组,dc=gnetis,dc=com" 
+
+删除用户(并不会删除同名的组）
+ldapdelete -x -D "cn=admin,dc=gnetis,dc=com" -W "uid=用户名,ou=组,dc=gnetis,dc=com"
+
+删除组
+ldapdelete -x -D "cn=admin,dc=gnetis,dc=com" -W "cn=组名,ou=组,dc=gnetis,dc=com"
+
+导出ldif文件
+ldapcat -l  文件名

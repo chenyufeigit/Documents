@@ -1,0 +1,9 @@
+select user_sex=e.Sex,user_workaddress=t.FName,user_name=e.name,user_email=e.Email,user_code=e.Code,CONVERT(char(36) , e.EM_ID) as user_emid,CONVERT(varchar(10), e.Birthday, 23) as user_birthday,user_position=p.Name,CONVERT(char(36) , p.ID) as  user_position_id,CONVERT(char(36) , u.ID) as user_user_department_id,user_department=u.Name,CONVERT(varchar(10),w.EnterGroupDate, 23) as user_entrytime,user_landline=a.HRMS_UserField_29,user_extension=a.HRMS_UserField_28,user_mobile=e.Telphone,user_type=w.Type_,user_is_marriage=e.MarriedStatus
+            from HM_Employees e
+            join HM_EmployeesAddInfo a on e.EM_ID=a.EM_ID
+            join ORG_Position_Employee pe on pe.EmID=e.EM_ID
+            join ORG_Position p on p.ID=pe.PositionID
+            join ORG_Unit u on p.UnitID=u.ID
+            join HR_Base_PublicCode t on a.WorkAddress=t.FID
+            join HM_EM_WorkInfo     w on w.EM_ID=e.EM_ID
+            where e.Status=1 and pe.IsPrimary='1'

@@ -1,0 +1,10 @@
+dpkg-reconfigure  slapd   重配ldap
+迁移schema文件夹
+迁移slapd.conf文件(include  /etc/ldap/schema/结构)或/etc/openldap/schema)
+如果是已slapd.d运行
+（将slapd.conf转为slapd.d #slaptest -f /etc/ldap/slapd.conf -F /etc/ldap/slapd.d）
+将/etc/ldap/sldap.d/cn\=conf/cn\=schema/   多余的删除 并改属主属组权限openldap
+启动后导入用户ldapadd -x -D cn=admin,dc=shoushudashi,dc=com -W -f gnetis.ldif
+
+
+如bdb报错 则moduleload  /var/lib/ldap/back_bdb.la

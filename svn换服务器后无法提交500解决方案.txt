@@ -1,0 +1,12 @@
+一、概述：svn迁移服务器后，客户端可以checkout，但是提交报错
+192.168.240.201:80 192.168.40.166 - guanghua.xiao [06/Aug/2018:09:40:29 +0800] "CHECKOUT /svn/uc/!svn/rvr/105521/code/branches/uc_server/uc_message_server/golang/src/uclib/ucuser/session.go HTTP/1.1" 500 642 "-" "SVN/1.8.8 (x64-microsoft-windows) serf/1.3.4 TortoiseSVN-1.8.5.25224"
+
+二、问题原因：
+由于缓存在本地的权限或者地址信息不匹配造成的
+
+三、解决方案：
+那就清除一下本地的缓存吧， 右键选中项目--> Team-> Referesh/Clearup [刷新/清除]
+或：
+右键选中项目 --> TortoiseSVN --> Referesh/Clearup [刷新/清除]
+或：
+右键选中项目 --> TortoiseSVN --> Clearup [清除]
